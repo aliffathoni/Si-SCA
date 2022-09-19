@@ -21,6 +21,7 @@ Si-SCA is a project to monitor heart rate and position status using Bluetooth Lo
 - Update BLE using NimBLE
 - Add RGB Indicator
 - Add Charging Control
+- Add Buzzer Indicator
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details
