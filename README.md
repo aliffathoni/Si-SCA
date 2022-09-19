@@ -3,7 +3,7 @@
 
 [![ARDUINO](https://img.shields.io/badge/ArduinoIDE-blue)](https://www.arduino.cc/en/software/)
 [![ESP32](https://img.shields.io/badge/ESP-32-000000.svg?longCache=true&style=flat&colorA=CC101F)](https://www.espressif.com/en/products/socs/esp32)
-[![UPDATE](https://img.shields.io/github/last-commit/AkagamiYozora/Si-SCA)]
+https://img.shields.io/github/last-commit/AkagamiYozora/Si-SCA)
 
 Si-SCA is a project to monitor heart rate and position status using Bluetooth Low Energy devices based on ESP32. This repository contain software for the devices to be installed.
 
