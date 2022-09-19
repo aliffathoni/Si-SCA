@@ -16,16 +16,16 @@ Si-SCA is a project to monitor heart rate and gyro status using Bluetooth Low En
  
 ## To-Do-List
 
-- [X] Establish Bluetooth Connection
-- [X] MAX30003 get HR data
+- [X] ~~Establish Bluetooth Connection~~
+- [X] ~~MAX30003 get HR data~~
 - [ ] Validate and Calibrate HR data
-- [X] MPU6050 get fixed Gyro data
+- [X] ~~MPU6050 get fixed Gyro data~~
 - [ ] Validate and Calibrate Gyro data
 - [ ] Get Battery Percentage Level
 - [ ] Update BLE using NimBLE
-- [X] Add RGB Indicator
+- [X] ~~Add RGB Indicator~~
 - [ ] Add Charging Control
-- [X] Add Buzzer Indicator
+- [X] ~~Add Buzzer Indicator~~
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details.
