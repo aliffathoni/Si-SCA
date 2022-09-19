@@ -38,20 +38,9 @@ class MyServerCallbacks: public BLEServerCallbacks {
     }
 };
 
-#include <Adafruit_MPU6050.h>
-#include <Adafruit_Sensor.h>
-#include <Wire.h>
-
-Adafruit_MPU6050 mpu;
-
 void setup() {
   Serial.begin(115200);
   pinMode(2, OUTPUT);
-  
-  mpu.begin();
-  mpu.setAccelerometerRange(MPU6050_RANGE_8_G);
-  mpu.setGyroRange(MPU6050_RANGE_500_DEG);
-  mpu.setFilterBandwidth(MPU6050_BAND_21_HZ);
   
   // Create the BLE Device
   BLEDevice::init(DeviceName.c_str());
@@ -112,15 +101,11 @@ void setup() {
 void loop() {
     // notify changed value
     if (deviceConnected) {
-        sensors_event_t a, g, temp;
-        mpu.getEvent(&a, &g, &temp);
-        int z = a.acceleration.z*100;
-
         BattMonCharacteristic->setValue((uint8_t*)&value, 2);
         BattMonCharacteristic->notify();
         HeartRateCharacteristic->setValue(String(value).c_str());
         HeartRateCharacteristic->notify();
-        AccelCharacteristic->setValue((uint8_t*)&z, 2);
+        AccelCharacteristic->setValue((uint8_t*)&value, 2);
         AccelCharacteristic->notify();
         value++;
         digitalWrite(2, value%2);
