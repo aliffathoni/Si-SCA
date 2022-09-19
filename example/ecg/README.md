@@ -14,3 +14,5 @@ This code provide example to get data from MAX30003 Heart Rate Sensor and displa
 | Ground  | GND | GND |
 | V Input | 3.3 | VCC |
 | Ground | NC | GND |
+
+For more details please check [Protocentral MAX30003](https://github.com/Protocentral/protocentral_max30003/) repository.
