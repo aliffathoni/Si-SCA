@@ -1,7 +1,10 @@
 
 # Si-SCA Project
 
+[![ARDUINO](https://img.shields.io/badge/ArduinoIDE-blue)](https://www.arduino.cc/en/software/)
+[![ESP32](https://img.shields.io/badge/ESP-32-000000.svg?longCache=true&style=flat&colorA=CC101F)](https://www.espressif.com/en/products/socs/esp32)
 Si-SCA is a project to monitor heart rate and position status using Bluetooth Low Energy devices based on ESP32. This repository contain software for the devices to be installed.
+
 ## Library Used
 
  - [Adafruit MPU 6050](https://github.com/adafruit/Adafruit_MPU6050)
