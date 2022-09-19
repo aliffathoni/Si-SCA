@@ -8,3 +8,5 @@ This code provide example to get data from MPU6050 Accelerometer Sensor and disp
 | Serial Clock  | 22 | SCL |
 | V Input | 3.3 | VCC |
 | Ground | NC | GND |
+
+For more details please check [Adafruit MPU6050](https://github.com/adafruit/Adafruit_MPU6050) repository.
