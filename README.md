@@ -9,5 +9,4 @@ Si-SCA is a project to monitor heart rate and position status using Bluetooth Lo
  - [NimBLE](https://github.com/h2zero/esp-nimble-cpp)
 
 ## License
-
-[MIT License](https://choosealicense.com/licenses/mit/)
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details
