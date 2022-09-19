@@ -7,3 +7,7 @@ Si-SCA is a project to monitor heart rate and position status using Bluetooth Lo
  - [Adafruit MPU 6050](https://github.com/adafruit/Adafruit_MPU6050)
  - [Protocentral MAX30003 HR Sensor](https://github.com/Protocentral/protocentral_max30003/)
  - [NimBLE](https://github.com/h2zero/esp-nimble-cpp)
+
+## License
+
+[MIT License](https://choosealicense.com/licenses/mit/)
