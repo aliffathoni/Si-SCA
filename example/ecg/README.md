@@ -1,6 +1,6 @@
 # ECG Example
 
-This code provide example to get data from MAX30003 Heart Rate Sensor and display it using Serial Monitor on Arduino IDE.
+This code provide example to get ecg graph data from AD8232 Heart Rate Sensor and display it using Serial Monitor and/or Serial Plotter on Arduino IDE.
 
 |FUNCTION| ESP32  | AD8232 |
 | ------------- | ------------- | ------------- |
@@ -9,5 +9,3 @@ This code provide example to get data from MAX30003 Heart Rate Sensor and displa
 | Analog Output  | 34 | Output |
 | V Input | 3.3 | 3.3 |
 | Ground | NC | GND |
-
-For more details please check [Protocentral MAX30003](https://github.com/Protocentral/protocentral_max30003/) repository.
