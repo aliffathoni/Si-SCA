@@ -16,12 +16,12 @@ Si-SCA is a project to monitor heart rate and gyro status using Bluetooth Low En
 ## To-Do-List
 
 - [X] ~~Establish Bluetooth Connection~~
-- [X] AD8232 HR Sensor Research
-- [ ] Validate and Calibrate HR data
+- [X] ~~AD8232 HR Sensor Research~~
+- [X] ~~Validate and Calibrate HR data~~
 - [X] ~~MPU6050 get fixed Gyro data~~
-- [ ] Validate and Calibrate Gyro data
-- [X] Get Battery Percentage Level
-- [X] Update BLE using NimBLE
+- [X] ~~Validate and Calibrate Gyro data~~
+- [X] ~~Get Battery Percentage Level~~
+- [X] ~~Update BLE using NimBLE~~
 - [X] ~~Add RGB Indicator~~
 - [ ] Add Charging Control
 - [X] ~~Add Buzzer Indicator~~
