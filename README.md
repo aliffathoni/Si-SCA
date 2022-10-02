@@ -12,7 +12,8 @@ Si-SCA is a project to monitor heart rate and gyro status using Bluetooth Low En
  - [Adafruit MPU 6050](https://github.com/adafruit/Adafruit_MPU6050)
  - [NimBLE](https://github.com/h2zero/esp-nimble-cpp)
  - [RGB LED](https://github.com/FastLED/FastLED)
- 
+ - [FreeRTOS](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/freertos.html)
+
 ## To-Do-List
 
 - [X] ~~Establish Bluetooth Connection~~
