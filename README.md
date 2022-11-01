@@ -25,8 +25,9 @@ Si-SCA is a project to monitor heart rate and gyro status using Bluetooth Low En
 - [X] ~~Update BLE using NimBLE~~
 - [X] ~~Add RGB Indicator~~
 - [X] ~~Add Buzzer Indicator~~
-- [ ] Configure Sleep Mode
-- [X] Import RTOS for better timing management
+- [X] ~~Configure Sleep Mode~~
+- [X] ~~Import RTOS for better timing management~~
+- [ ] Add AI for ECG signal detector
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details.
