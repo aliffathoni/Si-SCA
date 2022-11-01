@@ -13,6 +13,7 @@ Si-SCA is a project to monitor heart rate and gyro status using Bluetooth Low En
  - [NimBLE](https://github.com/h2zero/esp-nimble-cpp)
  - [RGB LED](https://github.com/FastLED/FastLED)
  - [FreeRTOS](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/freertos.html)
+ - [TaskScheduler](https://github.com/arkhipenko/TaskScheduler)
 
 ## To-Do-List
 
