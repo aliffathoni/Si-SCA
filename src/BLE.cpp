@@ -3,19 +3,39 @@
 BLEServer* pServer = NULL;
 BLECharacteristic* HeartRateCharacteristic = NULL;
 BLECharacteristic* BattMonCharacteristic = NULL;
-BLECharacteristic* AccelCharacteristic = NULL;
+BLECharacteristic* ECGCharacteristic = NULL;
+BLECharacteristic* ECG2Characteristic = NULL;
+BLECharacteristic* CondCharacteristic = NULL;
 
-static BLEUUID service_HR_UUID(BLEUUID((uint16_t)0x180D));
-static BLEUUID char_HR_UUID(BLEUUID((uint16_t)0x2A37));
-BLEDescriptor descriptor_HR_UUID(BLEUUID((uint16_t)0x2901));
+// #define HR_UUID        "0000180d-0000-1000-8000-00805f9b34fb"
+// #define HR_C_UUID "00002a37-0000-1000-8000-00805f9b34fb"
 
-static BLEUUID service_BATT_UUID(BLEUUID((uint16_t)0x180F));
-static BLEUUID char_BATT_UUID(BLEUUID((uint16_t)0x2A19));
-BLEDescriptor descriptor_BATT_UUID(BLEUUID((uint16_t)0x2901));
+static BLEUUID HR_UUID(BLEUUID((uint16_t)0x180D));
+static BLEUUID HR_C_UUID(BLEUUID((uint16_t)0x2A37));
 
-static BLEUUID service_ACL_UUID(BLEUUID((uint16_t)0x1819));
-static BLEUUID char_ACL_UUID(BLEUUID((uint16_t)0x290C));
-BLEDescriptor descriptor_ACL_UUID(BLEUUID((uint16_t)0x2713));
+// #define BATT_UUID              "0000180f-0000-1000-8000-00805f9b34fb"
+// #define BATT_C_UUID            "00002a19-0000-1000-8000-00805f9b34fb"
+
+static BLEUUID BATT_UUID(BLEUUID((uint16_t)0x180F));
+static BLEUUID BATT_C_UUID(BLEUUID((uint16_t)0x2A19));
+
+// #define ECG_UUID              "0000183e-0000-1000-8000-00805f9b34fb"
+// #define ECG_C_UUID            "00002a58-0000-1000-8000-00805f9b34fb"
+
+static BLEUUID ECG_UUID(BLEUUID((uint16_t)0x183E));
+static BLEUUID ECG_C_UUID(BLEUUID((uint16_t)0x2A58));
+
+// #define COND_UUID              "0000181a-0000-1000-8000-00805f9b34fb"
+// #define COND_C_UUID            "0000290c-0000-1000-8000-00805f9b34fb"
+
+static BLEUUID COND_UUID(BLEUUID((uint16_t)0x181A));
+static BLEUUID COND_C_UUID(BLEUUID((uint16_t)0x290C));
+
+// #define ECG2_UUID              "00001813-0000-1000-8000-00805f9b34fb"
+// #define ECG2_C_UUID            "00002a58-0000-1000-8000-00805f9b34fb"
+
+static BLEUUID ECG2_UUID(BLEUUID((uint16_t)0x1813));
+static BLEUUID ECG2_C_UUID(BLEUUID((uint16_t)0x2A58));
 
 bool deviceConnected = false;
 bool oldDeviceConnected = false;
@@ -27,6 +47,7 @@ class MyServerCallbacks: public BLEServerCallbacks {
 
     void onDisconnect(BLEServer* pServer) {
       deviceConnected = false;
+      pServer->startAdvertising();
     }
 };
 
@@ -43,49 +64,74 @@ void BLE::begin(void)
   pServer = BLEDevice::createServer();
   pServer->setCallbacks(new MyServerCallbacks());
 
+  // Create the BLE Server
+  pServer = BLEDevice::createServer();
+  pServer->setCallbacks(new MyServerCallbacks());
+
   // Create the BLE Service
-  BLEService *HeartRateService = pServer->createService(service_HR_UUID);
+  BLEService *HeartRateService = pServer->createService(HR_UUID);
 
   // Create a BLE Characteristic
   HeartRateCharacteristic = HeartRateService->createCharacteristic(
-                      char_HR_UUID,
+                      HR_C_UUID,
                       BLECharacteristic::PROPERTY_READ   |
                       BLECharacteristic::PROPERTY_WRITE  |
                       BLECharacteristic::PROPERTY_NOTIFY |
                       BLECharacteristic::PROPERTY_INDICATE
                     );
-  HeartRateCharacteristic->addDescriptor(&descriptor_HR_UUID);
-
-  BLEService *BattMonService = pServer->createService(service_BATT_UUID);
+  HeartRateCharacteristic->addDescriptor(new BLE2902());
+  
+  BLEService *BattMonService = pServer->createService(BATT_UUID);
 
   BattMonCharacteristic = BattMonService->createCharacteristic(
-                      char_BATT_UUID,
+                      BATT_C_UUID,
                       BLECharacteristic::PROPERTY_READ   |
                       BLECharacteristic::PROPERTY_WRITE  |
                       BLECharacteristic::PROPERTY_NOTIFY |
                       BLECharacteristic::PROPERTY_INDICATE
                     );
-  BattMonCharacteristic->addDescriptor(&descriptor_BATT_UUID);
+  BattMonCharacteristic->addDescriptor(new BLE2902());
 
-  BLEService *AccelService = pServer->createService(service_ACL_UUID);
+  BLEService *CondService = pServer->createService(COND_UUID);
 
-  AccelCharacteristic = AccelService->createCharacteristic(
-                      char_ACL_UUID,
+  CondCharacteristic = CondService->createCharacteristic(
+                      COND_C_UUID,
                       BLECharacteristic::PROPERTY_READ   |
                       BLECharacteristic::PROPERTY_WRITE  |
                       BLECharacteristic::PROPERTY_NOTIFY |
                       BLECharacteristic::PROPERTY_INDICATE
                     );
-  AccelCharacteristic->addDescriptor(&descriptor_ACL_UUID);
+  CondCharacteristic->addDescriptor(new BLE2902());
+
+  BLEService *ECGService = pServer->createService(ECG_UUID);
+
+  ECGCharacteristic = ECGService->createCharacteristic(
+                      ECG_C_UUID,
+                      BLECharacteristic::PROPERTY_READ   |
+                      BLECharacteristic::PROPERTY_WRITE  |
+                      BLECharacteristic::PROPERTY_NOTIFY |
+                      BLECharacteristic::PROPERTY_INDICATE
+                    );
+  ECGCharacteristic->addDescriptor(new BLE2902());
+
+  ECG2Characteristic = ECGService->createCharacteristic(
+                      ECG2_C_UUID,
+                      BLECharacteristic::PROPERTY_READ   |
+                      BLECharacteristic::PROPERTY_WRITE  |
+                      BLECharacteristic::PROPERTY_NOTIFY |
+                      BLECharacteristic::PROPERTY_INDICATE
+                    );
+  ECG2Characteristic->addDescriptor(new BLE2902());
 
   // Start the service
   HeartRateService->start();
   BattMonService->start();
-  AccelService->start();
-
+  ECGService->start();
+  CondService->start();
+  
   // Start advertising
   BLEAdvertising *pAdvertising = BLEDevice::getAdvertising();
-  pAdvertising->addServiceUUID(service_HR_UUID);
+  pAdvertising->addServiceUUID(HR_UUID);
   pAdvertising->setScanResponse(false);
   pAdvertising->setMinPreferred(0x0);  // set value to 0x00 to not advertise this parameter
   BLEDevice::startAdvertising();
@@ -93,50 +139,38 @@ void BLE::begin(void)
 
 bool BLE::checkConnection(void)
 {
-  if (deviceConnected) {
-    Serial.print("Device Connected!");
-    return true;
-  }
-  // disconnecting
-  if (!deviceConnected && oldDeviceConnected) {
-    pServer->startAdvertising(); // restart advertising
-    oldDeviceConnected = deviceConnected;
-    // Serial.println("Device not Connected!")
-    return false;
-  }
-  // connecting
-  if (deviceConnected && !oldDeviceConnected) {
-    oldDeviceConnected = deviceConnected;
-  }
+  if (deviceConnected) return true;
+  else return false;
 }
 
 void BLE::send_HR_Data(int hr)
 {
-  _hr = hr;
-  String hrString = String(_hr);
+  String hrString = String(hr);
   HeartRateCharacteristic->setValue(hrString.c_str());
   HeartRateCharacteristic->notify();
 }
 
 void BLE::send_ECG_Data(int ecg)
 {
-  _ecg = ecg;
-  String ecgString = String(_ecg);
+  String ecgString = String(ecg);
   HeartRateCharacteristic->setValue(ecgString.c_str());
   HeartRateCharacteristic->notify();
 }
 
-void BLE::send_User_Pos(String pos)
+void BLE::send_User_Activity(String pos)
 {
-  _pos = pos;
-  AccelCharacteristic->setValue(_pos.c_str());
+  AccelCharacteristic->setValue(pos.c_str());
   AccelCharacteristic->notify();
 }
 
 void BLE::send_Batt_Percentage(int batt)
 {
-  _batt = batt;
-  String battString = String(_batt);
+  String battString = String(batt);
   BattMonCharacteristic->setValue(battString.c_str());
   BattMonCharacteristic->notify();
+}
+
+void BLE::send_Diagnose(String quickResult)
+{
+  
 }

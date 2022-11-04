@@ -9,9 +9,10 @@ class AD8232
     AD8232(uint8_t pin, uint8_t pPin, uint8_t nPin);
     int getDataECG(void);
     int getDataHR(void);
-    void begin();
+    void begin(void);
     void setLatency(long latency);
     void setTresshold(int Upper, int Lower);
+    String quickDetect(void);
   private:
     uint8_t _pin;
     long _latency = 20;
@@ -29,6 +30,7 @@ class AD8232
     unsigned long PulseInterval = 0;
     unsigned long lastScan = 0;
     unsigned long lastPrint = 0;
+    String quickDetectValue;
 };
 
 #endif

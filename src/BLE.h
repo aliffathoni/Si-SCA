@@ -17,12 +17,9 @@ class BLE
     void send_ECG_Data(int ecg);
     void send_User_Pos(String pos);
     void send_Batt_Percentage(int batt);
+    void send_Diagnose(String quickResult)
   private:
     String _deviceName = "Si-SCA "+String((uint8_t)ESP.getEfuseMac(), HEX);
-    int _hr;
-    int _ecg;
-    String _pos;
-    int _batt;
 };
 
 #endif

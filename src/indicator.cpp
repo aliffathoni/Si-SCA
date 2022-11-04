@@ -13,30 +13,25 @@ BUZZER::BUZZER(unsigned char pin)
   _pin = pin;
 }
 
+BATTERY::BATTERY(uint8_t pin)
+{
+  _pin = pin;
+}
+
 void LED::begin(void)
 {
   pinMode(_pin, OUTPUT);
-  FastLED.addLeds<WS2812, 15>(leds, 1);
+  FastLED.addLeds<WS2812, _pin, GRB>(leds, 1);
 }
 
-void LED::on(char color)
+void LED::on(String color, int brightness)
 { 
-  _color = color;
-  switch (color) {
-    case 'R':
-      leds[0] = CRGB::Red;
-      break;
-    case 'G':
-      leds[0] = CRGB::Green;
-      break;
-    case 'B':
-      leds[0] = CRGB::Blue;
-      break;
-    default :
-      leds[0] = CRGB::White;
-      break;
-  }
-  FastLED.setBrightness(4);
+  if(color == "Red") leds[0] = CRGB::Red;
+  else if(color == "Green") leds[0] = CRGB::Green;
+  else if(color == "Blue") leds[0] = CRGB::Blue;
+  else leds[0] = CRGB::Red;
+
+  FastLED.setBrightness(brightness);
   FastLED.show();
 }
 
@@ -51,12 +46,16 @@ void BUZZER::begin(void)
   pinMode(_pin, OUTPUT);
 }
 
-void BUZZER::on(void)
+void BUZZER::set(bool _buzzerState)
 {
-  digitalWrite(_pin, HIGH);
+  digitalWrite(_pin, _buzzerState);
 }
 
-void BUZZER::off(void)
+double BATTERY::getBattery(void)
 {
-  digitalWrite(_pin, LOW);
+  int analogValue = analogRead(_pin);
+  int percentage = 0;
+
+  percentage = (analogValue/4095)*100;
+  return percentage;
 }
