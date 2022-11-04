@@ -70,3 +70,17 @@ int AD8232::getDataHR(void)
     return 0;
   }
 }
+
+String AD8232::quickDetect(void)
+{
+  if(_adc /*gelombang normal*/){
+    return "Normal";
+  }
+  if(_adc /*gelombang aneh*/){
+    if(_adc/*takar*/){
+      return "Takar";
+    } else{
+      return "Vibri";
+    }
+  }
+}

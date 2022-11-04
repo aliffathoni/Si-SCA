@@ -8,11 +8,10 @@ class LED
   public:
     LED(uint8_t pin);
     void begin(void);
-    void on(char color);
+    void on(String color, int brightness);
     void off(void);
   private:
     unsigned char _pin;
-    char _color;
 };
 
 class BUZZER
@@ -20,8 +19,16 @@ class BUZZER
   public:
     BUZZER(uint8_t pin);
     void begin(void);
-    void on(void);
-    void off(void);
+    void set(bool _buzzerState);
+  private:
+    uint8_t _pin;
+};
+
+class BATTERY
+{
+  public:
+    BATTERY(uint8_t pin);
+    double getBattery(void);
   private:
     uint8_t _pin;
 };
