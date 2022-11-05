@@ -2,6 +2,8 @@
 
 SiSCA sisca;
 
+//Add task scheduler and rtos to improve speed ok!
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
