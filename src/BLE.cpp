@@ -172,5 +172,5 @@ void BLE::send_Batt_Percentage(int batt)
 
 void BLE::send_Diagnose(String quickResult)
 {
-  
+  //create characteristic and send notify
 }
