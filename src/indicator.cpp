@@ -21,7 +21,7 @@ BATTERY::BATTERY(uint8_t pin)
 void LED::begin(void)
 {
   pinMode(_pin, OUTPUT);
-  FastLED.addLeds<WS2812, _pin, GRB>(leds, 1);
+  FastLED.addLeds<WS2812, 15, GRB>(leds, 1); //change 15 to _pin value
 }
 
 void LED::on(String color, int brightness)

@@ -74,12 +74,15 @@ int AD8232::getDataHR(void)
 String AD8232::quickDetect(void)
 {
   if(_adc /*gelombang normal*/){
+    quickDetectValue = "Normal";
     return "Normal";
   }
   if(_adc /*gelombang aneh*/){
     if(_adc/*takar*/){
+      quickDetectValue = "Takar";
       return "Takar";
     } else{
+      quickDetectValue = "Fibri";
       return "Vibri";
     }
   }
