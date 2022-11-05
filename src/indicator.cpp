@@ -3,12 +3,12 @@
 
 CRGB leds[1];
 
-LED::LED(uint8_t pin)
+LED::LED(int pin)
 {
   _pin = pin;
 }
 
-BUZZER::BUZZER(unsigned char pin)
+BUZZER::BUZZER(uint8_t pin)
 {
   _pin = pin;
 }
@@ -21,7 +21,7 @@ BATTERY::BATTERY(uint8_t pin)
 void LED::begin(void)
 {
   pinMode(_pin, OUTPUT);
-  FastLED.addLeds<WS2812, 15, GRB>(leds, 1); //change 15 to _pin value
+  FastLED.addLeds<WS2812, _pin, GRB>(leds, 1); //change 15 to _pin value
 }
 
 void LED::on(String color, int brightness)
