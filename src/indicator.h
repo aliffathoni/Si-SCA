@@ -6,12 +6,12 @@
 class LED
 {
   public:
-    LED(uint8_t pin);
+    LED(int pin);
     void begin(void);
     void on(String color, int brightness);
     void off(void);
   private:
-    unsigned char _pin;
+    int _pin;
 };
 
 class BUZZER
