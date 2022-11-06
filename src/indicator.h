@@ -2,35 +2,17 @@
 #define INDICATOR_h
 
 #include <Arduino.h>
+#include <Adafruit_NeoPixel.h>
 
-class LED
-{
-  public:
-    LED(int pin);
-    void begin(void);
-    void on(String color, int brightness);
-    void off(void);
-  private:
-    int _pin;
-};
+void ledBegin(int ledPin);
+void ledOn(String color);
+void ledOff(void);
 
-class BUZZER
-{
-  public:
-    BUZZER(uint8_t pin);
-    void begin(void);
-    void set(bool _buzzerState);
-  private:
-    uint8_t _pin;
-};
+void buzzerBegin(uint8_t buzzerPin);
+void buzzerOn(void);
+void buzzerOff(void);
 
-class BATTERY
-{
-  public:
-    BATTERY(uint8_t pin);
-    double getBattery(void);
-  private:
-    uint8_t _pin;
-};
+void batteryBegin(uint8_t batteryPin);
+int getBattery(void);
 
 #endif

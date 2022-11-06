@@ -1,30 +1,41 @@
 #include "AD8232.h"
 
-AD8232::AD8232(uint8_t pin, uint8_t pPin, uint8_t nPin)
+uint8_t _pin;
+long _latency = 20;
+long lastRead;
+int _bpm;
+int _adc;
+int BPM;
+int UpperTresshold;
+int LowerTresshold;
+bool IgnoreReading = false;
+bool FirstPulseDetected = false;
+unsigned long FirstPulseTime = 0;
+unsigned long SecondPulseTime = 0;
+unsigned long PulseInterval = 0;
+unsigned long lastScan = 0;
+unsigned long lastPrint = 0;
+String quickDetectValue;
+
+void adBegin(uint8_t pin)
 {
   _pin = pin;
-  _pPin = pPin;
-  _nPin = nPin;
+  
+  pinMode(_pin, INPUT);
 }
 
-void AD8232::begin()
-{
-  pinMode(_pPin, INPUT);
-  pinMode(_nPin, INPUT);
-}
-
-void AD8232::setLatency(long latency)
+void setLatency(long latency)
 {
   _latency = latency;
 }
 
-void AD8232::setTresshold(int Upper, int Lower)
+void setTresshold(int Upper, int Lower)
 {
   UpperTresshold = Upper;
   LowerTresshold = Lower;
 }
 
-int AD8232::getDataECG(void)
+int getDataECG(void)
 {
   int ecg;
   if(millis() - lastRead > _latency){
@@ -38,7 +49,7 @@ int AD8232::getDataECG(void)
   }
 }
 
-int AD8232::getDataHR(void)
+int getDataHR(void)
 {
   int hr;
   if(millis() - lastRead > _latency){
@@ -71,7 +82,7 @@ int AD8232::getDataHR(void)
   }
 }
 
-String AD8232::quickDetect(void)
+String quickDetect(void)
 {
   if(_adc /*gelombang normal*/){
     quickDetectValue = "Normal";

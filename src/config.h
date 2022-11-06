@@ -2,7 +2,6 @@
 #define CONFIG_h
 
 #include <Arduino.h>
-#include <TaskScheduler.h>
 
 #include "MPU6050.h"
 #include "AD8232.h"
@@ -15,45 +14,47 @@
 #define adn         17
 #define ana         34
 
-LED led(LED_PIN);
-AD8232 ad(adp, adn, ana);
-MPU6050 mp;
-BLE ble("sisca");
-BUZZER buzz(BUZZER_PIN);
-
 class SiSCA
 { 
   public:
-    SiSCA(void);
+    SiSCA(String bluetoothName,
+          uint8_t ledPin,
+          uint8_t buzzerPin,
+          uint8_t batteryPin,
+          uint8_t adcPin);
+
     void begin(void);
+
     void startSystem(void);
+
+    /*
+    void getHR(void);
+
+    void getECG(void);
+
+    void getDiagnose(void);
+
+    void getBattery(void);
+
+    void getActivity(void);
+
+    void getData(void);
+
+    void setBuzzer(void);
+
+    void setLed(void);
+
+    void startBluetooth(void);
+
+    void stopBluetooth(void);
+    */
+
+  private:
+    String _bluetoothName;
+    uint8_t _ledPin,
+            _buzzerPin,
+            _batteryPin,
+            _adcPin;
 };
-
-SiSCA::SiSCA(void){}
-
-void SiSCA::begin()
-{
-  led.begin();
-  ble.begin();
-  buzz.begin();
-  // ad.begin();
-  // mp.begin();
-}
-
-void SiSCA::startSystem()
-{
-  // ad.getDataECG();
-  // ad.getDataHR();
-  // Serial.println(mp.getPosition());
-  // if(ble.checkConnection()){
-  //   int r = random(1, 99);
-  //   ble.send_HR_Data(r);
-  // }
-  // buzz.set(1);
-  led.on("Green", 64);
-  delay(500);
-  led.off();
-  delay(500);
-}
 
 #endif

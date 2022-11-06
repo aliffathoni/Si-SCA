@@ -1,59 +1,58 @@
 #include "indicator.h"
-#include <FastLED.h>
 
-CRGB leds[1];
+Adafruit_NeoPixel pixels(1, 15, NEO_GRB + NEO_KHZ800);
 
-LED::LED(int pin)
+void ledBegin(int ledPin)
 {
-  _pin = pin;
+  pixels.begin();
+  pixels.setPin(ledPin);
 }
 
-BUZZER::BUZZER(uint8_t pin)
+void ledOn(String color)
 {
-  _pin = pin;
+  if(color == "Red") pixels.setPixelColor(0, 255, 0, 0);
+  else if(color == "Green") pixels.setPixelColor(0, 0, 255, 0);
+  else if(color == "Blue") pixels.setPixelColor(0, 0, 0, 255);
+  else pixels.setPixelColor(0, 127, 127, 127);
+
+  pixels.show();
 }
 
-BATTERY::BATTERY(uint8_t pin)
+void ledOff(void)
 {
-  _pin = pin;
+  pixels.clear();
+  pixels.show();
 }
 
-void LED::begin(void)
+uint8_t _buzzerPin;
+
+void buzzerBegin(uint8_t buzzerPin)
 {
-  pinMode(_pin, OUTPUT);
-  FastLED.addLeds<WS2812, _pin, GRB>(leds, 1); //change 15 to _pin value
+  _buzzerPin = buzzerPin;
+  pinMode(_buzzerPin, OUTPUT);
 }
 
-void LED::on(String color, int brightness)
-{ 
-  if(color == "Red") leds[0] = CRGB::Red;
-  else if(color == "Green") leds[0] = CRGB::Green;
-  else if(color == "Blue") leds[0] = CRGB::Blue;
-  else leds[0] = CRGB::Red;
-
-  FastLED.setBrightness(brightness);
-  FastLED.show();
+void buzzerOn(void)
+{
+  digitalWrite(_buzzerPin, HIGH);
 }
 
-void LED::off(void)
+void buzzerOff(void)
 {
-  FastLED.setBrightness(0);
-  FastLED.show();
+  digitalWrite(_buzzerPin, LOW);
 }
 
-void BUZZER::begin(void)
+uint8_t _batteryPin;
+
+void batteryBegin(uint8_t batteryPin)
 {
-  pinMode(_pin, OUTPUT);
+  _batteryPin = batteryPin;
+  pinMode(_batteryPin, INPUT);
 }
 
-void BUZZER::set(bool _buzzerState)
+int getBattery(void)
 {
-  digitalWrite(_pin, _buzzerState);
-}
-
-double BATTERY::getBattery(void)
-{
-  int analogValue = analogRead(_pin);
+  int analogValue = analogRead(_batteryPin);
   int percentage = 0;
 
   percentage = (analogValue/4095)*100;

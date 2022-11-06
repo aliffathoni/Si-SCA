@@ -6,11 +6,7 @@
 #include <Adafruit_Sensor.h>
 #include <Wire.h>
 
-class MPU6050
-{
-  public:
-    void begin(void);
-    String getPosition(void);
-};
+void mpuBegin(void);
+String getPosition(void);
 
 #endif

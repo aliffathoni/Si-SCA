@@ -2,7 +2,7 @@
 
 Adafruit_MPU6050 mpu;
 
-void MPU6050::begin(void)
+void mpuBegin(void)
 {
   mpu.begin();
 
@@ -33,7 +33,7 @@ void MPU6050::begin(void)
   
 }
 
-String MPU6050::getPosition(void)
+String getPosition(void)
 {
   float position;
   sensors_event_t a, g, temp;

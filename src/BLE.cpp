@@ -1,5 +1,7 @@
 #include "BLE.h"
 
+String _deviceName = "Si-SCA "+String((uint8_t)ESP.getEfuseMac(), HEX);
+
 BLEServer* pServer = NULL;
 BLECharacteristic* HeartRateCharacteristic = NULL;
 BLECharacteristic* BattMonCharacteristic = NULL;
@@ -51,13 +53,9 @@ class MyServerCallbacks: public BLEServerCallbacks {
     }
 };
 
-BLE::BLE(String deviceName)
+void bleBegin(String deviceName)
 {
-  _deviceName = deviceName;
-}
-
-void BLE::begin(void)
-{
+  if(deviceName!="") _deviceName = deviceName;
   BLEDevice::init(_deviceName.c_str());
 
   // Create the BLE Server
@@ -137,40 +135,43 @@ void BLE::begin(void)
   BLEDevice::startAdvertising();
 }
 
-bool BLE::checkConnection(void)
+bool checkConnection(void)
 {
   if (deviceConnected) return true;
   else return false;
 }
 
-void BLE::send_HR_Data(int hr)
+void send_HR_Data(int hr)
 {
   String hrString = String(hr);
   HeartRateCharacteristic->setValue(hrString.c_str());
   HeartRateCharacteristic->notify();
 }
 
-void BLE::send_ECG_Data(int ecg)
+void send_ECG_Data(int ecg)
 {
   String ecgString = String(ecg);
   HeartRateCharacteristic->setValue(ecgString.c_str());
   HeartRateCharacteristic->notify();
 }
 
-void BLE::send_User_Activity(String pos)
+void send_User_Activity(String pos)
 {
-  AccelCharacteristic->setValue(pos.c_str());
-  AccelCharacteristic->notify();
+  CondCharacteristic->setValue(pos.c_str());
+  CondCharacteristic->notify();
 }
 
-void BLE::send_Batt_Percentage(int batt)
+void send_Batt_Percentage(int batt)
 {
   String battString = String(batt);
   BattMonCharacteristic->setValue(battString.c_str());
   BattMonCharacteristic->notify();
 }
 
-void BLE::send_Diagnose(String quickResult)
+void send_Diagnose(String quickResult)
 {
   //create characteristic and send notify
+  while(checkConnection()){
+    //send diagnose
+  }
 }

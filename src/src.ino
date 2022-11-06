@@ -1,6 +1,6 @@
 #include "config.h"
 
-SiSCA sisca;
+SiSCA sisca("sisca", 15, 16, 33, 32);
 
 //Add task scheduler and rtos to improve speed ok!
 
