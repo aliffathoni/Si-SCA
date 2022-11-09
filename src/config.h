@@ -47,6 +47,8 @@ class SiSCA
     void startBluetooth(void);
 
     void stopBluetooth(void);
+    
+    void sen
     */
 
   private:
