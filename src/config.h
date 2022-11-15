@@ -14,6 +14,10 @@
 #define adn         17
 #define ana         34
 
+
+/*!
+ *  @brief initiate SiSCA system class
+*/
 class SiSCA
 { 
   public:
@@ -27,16 +31,15 @@ class SiSCA
 
     void startSystem(void);
 
-    /*
-    void getHR(void);
+    int getHR(void);
 
-    void getECG(void);
+    int getECG(void);
 
-    void getDiagnose(void);
+    String getDiagnose(void);
 
-    void getBattery(void);
+    int getBattery(void);
 
-    void getActivity(void);
+    String getActivity(void);
 
     void getData(void);
 
@@ -48,8 +51,9 @@ class SiSCA
 
     void stopBluetooth(void);
     
-    void sen
-    */
+    void sendData(void);
+
+    void sendECGData(void);
 
   private:
     String _bluetoothName;

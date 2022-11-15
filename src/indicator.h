@@ -13,6 +13,6 @@ void buzzerOn(void);
 void buzzerOff(void);
 
 void batteryBegin(uint8_t batteryPin);
-int getBattery(void);
+int getDataBattery(void);
 
 #endif

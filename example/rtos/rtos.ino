@@ -184,7 +184,7 @@ class MyServerCallbacks: public BLEServerCallbacks {
     void onConnect(BLEServer* pServer) {
       deviceConnected = true;
       Serial.println("Device Connected!");
-      sleep_check.disable();
+      // sleep_check.disable();
     }
 
     void onDisconnect(BLEServer* pServer) {
@@ -192,7 +192,7 @@ class MyServerCallbacks: public BLEServerCallbacks {
       deviceConnected = false;
       Serial.println("Device Disconnected!");
       pServer->startAdvertising();
-      sleep_check.enable();
+      // sleep_check.enable();
     }
 };
 

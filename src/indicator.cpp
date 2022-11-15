@@ -50,7 +50,7 @@ void batteryBegin(uint8_t batteryPin)
   pinMode(_batteryPin, INPUT);
 }
 
-int getBattery(void)
+int getDataBattery(void)
 {
   int analogValue = analogRead(_batteryPin);
   int percentage = 0;
