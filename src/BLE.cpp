@@ -150,28 +150,34 @@ void send_HR_Data(int hr)
 
 void send_ECG_Data(int ecg)
 {
-  String ecgString = String(ecg);
-  HeartRateCharacteristic->setValue(ecgString.c_str());
-  HeartRateCharacteristic->notify();
+  if(checkConnection()){
+    String ecgString = String(ecg);
+    HeartRateCharacteristic->setValue(ecgString.c_str());
+    HeartRateCharacteristic->notify();
+  }
 }
 
 void send_User_Activity(String pos)
 {
-  CondCharacteristic->setValue(pos.c_str());
-  CondCharacteristic->notify();
+  if(checkConnection()){
+    CondCharacteristic->setValue(pos.c_str());
+    CondCharacteristic->notify();
+  }
 }
 
 void send_Batt_Percentage(int batt)
 {
-  String battString = String(batt);
-  BattMonCharacteristic->setValue(battString.c_str());
-  BattMonCharacteristic->notify();
+  if(checkConnection()){
+    String battString = String(batt);
+    BattMonCharacteristic->setValue(battString.c_str());
+    BattMonCharacteristic->notify();
+  }
 }
 
 void send_Diagnose(String quickResult)
 {
   //create characteristic and send notify
-  while(checkConnection()){
+  if(checkConnection()){
     //send diagnose
   }
 }

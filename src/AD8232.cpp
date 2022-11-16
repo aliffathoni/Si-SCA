@@ -38,58 +38,46 @@ void setTresshold(int Upper, int Lower)
 int getDataECG(void)
 {
   int ecg;
-  if(millis() - lastRead > _latency){
-    lastRead = millis();
-    ecg = analogRead(_pin);
-    // Serial.println(ecg);
-    _adc = ecg;
-    return ecg;
-  } else{
-    return 0;
-  }
+  ecg = analogRead(_pin);
+  return ecg;
 }
 
 int getDataHR(void)
 {
   int hr;
-  if(millis() - lastRead > _latency){
-    lastRead = millis();
-    hr = analogRead(_pin);
-    if(hr > UpperTresshold && IgnoreReading == false){
-      if(FirstPulseDetected == false){
-        FirstPulseTime = millis();
-        FirstPulseDetected = true;
-      }
-      else{
-        SecondPulseTime = millis();
-        PulseInterval = SecondPulseTime - FirstPulseTime;
-        FirstPulseTime = SecondPulseTime;
-      }
-      IgnoreReading = true;
+  hr = getDataECG();
+  if(hr > UpperTresshold && IgnoreReading == false){
+    if(FirstPulseDetected == false){
+      FirstPulseTime = millis();
+      FirstPulseDetected = true;
     }
-
-    // Heart beat trailing edge detected.
-    if(hr < LowerTresshold && IgnoreReading == true){
-      IgnoreReading = false;
-    }  
-
-    // Calculate Beats Per Minute.
-    BPM = (1.0/PulseInterval) * 60.0 * 1000;
-
-    return BPM;
-  } else{
-    return 0;
+    else{
+      SecondPulseTime = millis();
+      PulseInterval = SecondPulseTime - FirstPulseTime;
+      FirstPulseTime = SecondPulseTime;
+    }
+    IgnoreReading = true;
   }
+
+  // Heart beat trailing edge detected.
+  if(hr < LowerTresshold && IgnoreReading == true){
+    IgnoreReading = false;
+  }  
+
+  // Calculate Beats Per Minute.
+  BPM = (1.0/PulseInterval) * 60.0 * 1000;
+
+  return BPM;
 }
 
 String quickDetect(void)
 {
-  if(_adc /*gelombang normal*/){
+  if(getDataECG()/*gelombang normal*/){
     quickDetectValue = "Normal";
     return "Normal";
   }
-  if(_adc /*gelombang aneh*/){
-    if(_adc/*takar*/){
+  if(getDataECG()/*gelombang aneh*/){
+    if(getDataECG()/*takar*/){
       quickDetectValue = "Takar";
       return "Takar";
     } else{

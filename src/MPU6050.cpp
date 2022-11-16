@@ -2,6 +2,9 @@
 
 Adafruit_MPU6050 mpu;
 
+/*!
+ *    @brief  Initiate and start MPU6050 sensor.
+ */
 void mpuBegin(void)
 {
   mpu.begin();
@@ -33,12 +36,21 @@ void mpuBegin(void)
   
 }
 
+/*!
+ *    @brief  Get User Activity Position.
+ *
+ *    @return String value of current user position.
+ */
 String getPosition(void)
 {
   float position;
   sensors_event_t a, g, temp;
   mpu.getEvent(&a, &g, &temp);
+  
+  // Z axis is gravity measurement value of the sensor
   position = a.acceleration.z;
+
+  // Standard gravity is 9.8m/s^2
   if(position > 8.0)
     return "Sleep";
   else if((position <= 8.0) && (position >= 0.0))

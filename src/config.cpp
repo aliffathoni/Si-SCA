@@ -1,6 +1,11 @@
 #include "config.h"
 #include <TaskScheduler.h>
 
+/*!
+ *    @brief  Initiate class name.
+ *
+ *    @return Initiated device name and wiring connection.
+ */
 SiSCA::SiSCA(String bluetoothName, uint8_t ledPin, uint8_t buzzerPin, uint8_t batteryPin, uint8_t adcPin)
 {
   _bluetoothName = bluetoothName;
@@ -10,9 +15,9 @@ SiSCA::SiSCA(String bluetoothName, uint8_t ledPin, uint8_t buzzerPin, uint8_t ba
   _adcPin = adcPin;
 }
 
-/*
- *  @brief start all necessary sensors and output
-*/
+/*!
+ *    @brief  start all necessary sensors and output
+ */
 void SiSCA::begin(void)
 {
   ledBegin(_ledPin);
