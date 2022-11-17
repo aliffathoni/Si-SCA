@@ -99,10 +99,10 @@ String SiSCA::getActivity(void)
  */
 void SiSCA::sendData(void)
 {
-  send_HR_Data(getDataHR);
-  send_Diagnose(getDiagnose);
-  send_Batt_Percentage(getBattery);
-  send_User_Activity(getActivity);
+  send_HR_Data(getDataHR());
+  send_Diagnose(getDiagnose());
+  send_Batt_Percentage(getBattery());
+  send_User_Activity(getActivity());
 }
 
 /*!
@@ -110,5 +110,5 @@ void SiSCA::sendData(void)
  */
 void SiSCA::sendECGData(void)
 {
-  send_ECG_Data(getECG);
+  send_ECG_Data(getECG());
 }

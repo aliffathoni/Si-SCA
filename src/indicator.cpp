@@ -17,7 +17,7 @@ void ledBegin(int ledPin)
 /*!
  *    @brief  Turn on LED.
  *    
- *    @param color is color to show on LED.
+ *    @param  color is color to show on LED.
  */
 void ledOn(String color)
 {

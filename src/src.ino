@@ -1,6 +1,6 @@
 #include "config.h"
 
-SiSCA sisca("sisca", 15, 16, 33, 32);
+SiSCA sisca("sisca", 2, 16, 33, 15);
 
 //Add task scheduler and rtos to improve speed ok!
 
@@ -12,5 +12,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  sisca.startSystem();
+  // sisca.startSystem();
+  Serial.println(sisca.getHR());
+  delay(500);
 }

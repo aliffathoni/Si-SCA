@@ -1,7 +1,9 @@
+#define LED_BUILTIN 2
+
 int adc;
-int UpperThreshold = 1000;
-int LowerThreshold = 400;
-float BPM = 0.0;
+int UpperThreshold = 1500;
+int LowerThreshold = 800;
+int BPM = 0;
 bool IgnoreReading = false;
 bool FirstPulseDetected = false;
 unsigned long FirstPulseTime = 0;
@@ -12,6 +14,7 @@ unsigned long lastPrint = 0;
 
 void setup() {
   Serial.begin(115200);
+  pinMode(LED_BUILTIN, OUTPUT);
   pinMode(16, INPUT); // Setup for leads off detection LO +
   pinMode(17, INPUT); // Setup for leads off detection LO -
 }
@@ -19,7 +22,7 @@ void setup() {
 void loop() {
   if(millis() - lastScan >= 20){
     lastScan = millis();
-    adc = analogRead(34); 
+    adc = analogRead(15); 
     // Heart beat leading edge detected.
     if(adc > UpperThreshold && IgnoreReading == false){
       if(FirstPulseDetected == false){
@@ -45,7 +48,7 @@ void loop() {
     BPM = (1.0/PulseInterval) * 60.0 * 1000;
   }
 
-  if(millis() - lastPrint > 1000){
+  if(millis() - lastPrint > 200){
     lastPrint = millis();
     Serial.print(adc);
     Serial.print("\t");

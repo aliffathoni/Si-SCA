@@ -9,8 +9,8 @@ BLECharacteristic* ECGCharacteristic = NULL;
 BLECharacteristic* ECG2Characteristic = NULL;
 BLECharacteristic* CondCharacteristic = NULL;
 
-// #define HR_UUID        "0000180d-0000-1000-8000-00805f9b34fb"
-// #define HR_C_UUID "00002a37-0000-1000-8000-00805f9b34fb"
+// #define HR_UUID                "0000180d-0000-1000-8000-00805f9b34fb"
+// #define HR_C_UUID              "00002a37-0000-1000-8000-00805f9b34fb"
 
 static BLEUUID HR_UUID(BLEUUID((uint16_t)0x180D));
 static BLEUUID HR_C_UUID(BLEUUID((uint16_t)0x2A37));

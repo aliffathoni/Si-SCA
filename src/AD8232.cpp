@@ -1,13 +1,12 @@
 #include "AD8232.h"
 
 uint8_t _pin;
-long _latency = 20;
 long lastRead;
 int _bpm;
 int _adc;
 int BPM;
-int UpperTresshold;
-int LowerTresshold;
+int UpperTresshold = 2000;
+int LowerTresshold = 1000;
 bool IgnoreReading = false;
 bool FirstPulseDetected = false;
 unsigned long FirstPulseTime = 0;
@@ -22,11 +21,6 @@ void adBegin(uint8_t pin)
   _pin = pin;
   
   pinMode(_pin, INPUT);
-}
-
-void setLatency(long latency)
-{
-  _latency = latency;
 }
 
 void setTresshold(int Upper, int Lower)
