@@ -1,7 +1,7 @@
 #include <SPI.h>
 #include <FastLED.h>
 
-#define LED_PIN     15
+#define LED_PIN     26
 #define NUM_LEDS    1
 #define BRIGHTNESS  16
 #define LED_TYPE    WS2812
