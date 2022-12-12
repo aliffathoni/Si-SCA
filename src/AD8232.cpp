@@ -42,6 +42,7 @@ int getDataHR(void)
   hr = getDataECG();
   if(hr > UpperTresshold && IgnoreReading == false){
     if(FirstPulseDetected == false){
+      LowerTresshold = hr - 700;
       FirstPulseTime = millis();
       FirstPulseDetected = true;
     }

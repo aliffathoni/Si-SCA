@@ -1,6 +1,6 @@
 #include "indicator.h"
 
-Adafruit_NeoPixel pixels(1, 15, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel pixels(1, 26, NEO_GRB + NEO_KHZ800);
 
 /*!
  *    @brief  Initiate Adafruit_NeoPixel Class and
@@ -21,10 +21,10 @@ void ledBegin(int ledPin)
  */
 void ledOn(String color)
 {
-  if(color == "Red") pixels.setPixelColor(0, 255, 0, 0);
-  else if(color == "Green") pixels.setPixelColor(0, 0, 255, 0);
-  else if(color == "Blue") pixels.setPixelColor(0, 0, 0, 255);
-  else pixels.setPixelColor(0, 127, 127, 127);
+  if(color == "Red") pixels.setPixelColor(0, 65, 0, 0);
+  else if(color == "Green") pixels.setPixelColor(0, 0, 65, 0);
+  else if(color == "Blue") pixels.setPixelColor(0, 0, 0, 65);
+  else pixels.setPixelColor(0, 65, 65, 65);
 
   pixels.show();
 }
