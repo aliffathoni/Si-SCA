@@ -1,5 +1,5 @@
-#ifndef BLE_h
-#define BLE_h
+#ifndef BLE_H_
+#define BLE_H_
 
 #include <Arduino.h>
 #include <BLEDevice.h>
@@ -7,12 +7,19 @@
 #include <BLEUtils.h>
 #include <BLE2902.h>
 
-bool checkConnection(void);
-void bleBegin(String deviceName);
-void send_HR_Data(int hr);
-void send_ECG_Data(int ecg);
-void send_User_Activity(String pos);
-void send_Batt_Percentage(int batt);
-void send_Diagnose(String quickResult);
+
+class bluetooth
+{
+    public:
+        bluetooth(/* args */);
+        ~bluetooth();
+        void init();
+        void send_bpm(int bpm_value);
+        void send_position(String position_value);
+        void send_battery(int batt_value);
+        void send_ecg(int ecg_value);
+        void send_ai(String ai_value);
+        bool status();    
+};
 
 #endif
