@@ -6,7 +6,7 @@
 #include <BLEUtils.h>
 #include <BLE2902.h>
 
-String device_name = "SiSCA-"+String((uint8_t)ESP.getEfuseMac(), HEX);
+String device_name = "SiSCA-"+String((uint16_t)ESP.getEfuseMac(), HEX);
 
 BLEServer* pServer = NULL;
 BLECharacteristic* HeartRateCharacteristic = NULL;
@@ -27,14 +27,14 @@ static BLEUUID HR_CHARACTERISTIC_UUID(BLEUUID((uint16_t)0x2A37));
 static BLEUUID BATT_UUID(BLEUUID((uint16_t)0x180F));
 static BLEUUID BATT_C_UUID(BLEUUID((uint16_t)0x2A19));
 
-// #define BATT_UUID              "0000181a-0000-1000-8000-00805f9b34fb"
-// #define BATT_C_UUID            "00002a58-0000-1000-8000-00805f9b34fb"
+// #define ECG_UUID              "0000181a-0000-1000-8000-00805f9b34fb"
+// #define ECG_C_UUID            "00002a58-0000-1000-8000-00805f9b34fb"
 
 static BLEUUID ECG_UUID(BLEUUID((uint16_t)0x181A));
 static BLEUUID ECG_C_UUID(BLEUUID((uint16_t)0x2A58));
 
-// #define BATT_UUID              "0000183e-0000-1000-8000-00805f9b34fb"
-// #define BATT_C_UUID            "0000290c-0000-1000-8000-00805f9b34fb"
+// #define COND_UUID              "0000183e-0000-1000-8000-00805f9b34fb"
+// #define COND_C_UUID            "0000290c-0000-1000-8000-00805f9b34fb"
 
 static BLEUUID COND_UUID(BLEUUID((uint16_t)0x183E));
 static BLEUUID COND_C_UUID(BLEUUID((uint16_t)0x290C));

@@ -3,5 +3,6 @@
     "board": "esp32:esp32:node32s",
     "programmer": "esp32:esptool",
     "output": ".build",
-    "sketch": "main\\main.ino"
+    "sketch": "main\\main.ino",
+    "port": "COM3"
 }

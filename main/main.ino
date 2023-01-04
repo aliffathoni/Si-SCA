@@ -13,13 +13,12 @@ bool deviceConnected = false;
 indicator cond(RGB_PIN, BUZZER_PIN, LED_PIN);
 sensor sens;
 
-TaskHandle_t sleep_task = NULL;
 TaskHandle_t led_task = NULL;
 TaskHandle_t mpu_task = NULL;
 TaskHandle_t send_mpu = NULL;
 TaskHandle_t send_ecg = NULL;
 TaskHandle_t send_rest = NULL;
-TaskHandle_t warning_task = NULL;
+TaskHandle_t sleep_task = NULL;
 
 int bpm_value = 0;
 int ecg_value = 0;
@@ -63,27 +62,15 @@ void led (void *pvParameter)
     }
 }
 
-void warning_fall (void *pvParameter)
-{
-    while (1)
-    {
-        cond.warning();
-        vTaskDelay(3000);
-    }
-    
-}
-
 void mpu (void *pvParameter)
 {
     while(1){
         if(sens.get_position() != lastPosition){
             lastPosition = sens.get_position();
-            // Serial.println(sens.get_position());
         }
         if(lastPosition == "Fall"){
-            vTaskSuspend(warning_task);
-        }   else{
-            vTaskResume(warning_task);
+            cond.warning();
+            vTaskDelay(2500);
         }
         vTaskDelay(100);
     }
@@ -121,7 +108,7 @@ void send_ecg_data (void *pvParameter)
       String a = String(ecg_value);
       ECGCharacteristic->setValue(a.c_str());
       ECGCharacteristic->notify();
-      // Serial.println(x);
+      Serial.println(a);
     }
     
     vTaskDelay(20);
@@ -253,13 +240,12 @@ void setup()
     BLEAdvertising *pAdvertising = BLEDevice::getAdvertising();
     pAdvertising->addServiceUUID(HR_SERVICE_UUID);
     pAdvertising->setScanResponse(false);
-    pAdvertising->setMinPreferred(0x0);  // set value to 0x00 to not advertise this parameter
+    pAdvertising->setMinPreferred(0x0);
     BLEDevice::startAdvertising();
     Serial.println("Bluetooth Created!");
 
     xTaskCreate(mpu, "MPU Task", 5000, NULL, 3, &mpu_task);
     xTaskCreate(led, "LED PWM Task", 5000, NULL, 3, &led_task);
-    xTaskCreate(warning_fall, "Device Fall Indicator", 5000, NULL, 2, &warning_task);
     xTaskCreate(sleep_check, "Sleep Timer", 5000, NULL, 3, &sleep_task);
     xTaskCreate(send_ecg_data, "Send ECG Data", 5000, NULL, 3, &send_ecg);
     xTaskCreate(send_mpu_data, "Send MPU Data", 5000, NULL, 3, &send_mpu);
